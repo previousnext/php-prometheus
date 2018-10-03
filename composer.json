@@ -1,0 +1,34 @@
+{
+  "name": "previousnext/pnx-prometheus",
+  "description": "A PHP library for serializing to the prometheus text format.",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Kim Pepper",
+      "email": "kim@previousnext.com.au"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "psr/log": "~1.0",
+    "symfony/serializer": "~3.4"
+  },
+  "require-dev": {
+    "drupal/coder": ">=8.2.12",
+    "phpunit/phpunit": "~6.5",
+    "symfony/phpunit-bridge": "~3.4"
+  },
+  "autoload": {
+    "psr-4": {"PNX\\Prometheus\\": "src/"}
+  },
+  "autoload-dev": {
+    "psr-4": {"PNX\\Prometheus\\Tests\\": "tests/"}
+  },
+  "config": {
+    "bin-dir": "bin/",
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true
+  }
+}
