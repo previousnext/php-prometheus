@@ -26,8 +26,8 @@ class PrometheusEncoder implements EncoderInterface {
     $output[] = '# HELP ' . $data['full_name'] . ' ' . $data['help'];
     $output[] = '# TYPE ' . $data['full_name'] . ' ' . $data['type'];
 
-    foreach ($data['values'] as $value) {
-      $output[] = $data['full_name'] . $this->encodeLabels($value['labels']) . ' ' . $value['value'];
+    foreach ($data['labelled_values'] as $labelledValue) {
+      $output[] = $data['full_name'] . $this->encodeLabels($labelledValue['labels']) . ' ' . $this->escapeValue($labelledValue['value']);
     }
     return implode("\n", $output) . "\n";
   }
@@ -50,6 +50,22 @@ class PrometheusEncoder implements EncoderInterface {
       $output[] = $key . '="' . $value . '"';
     }
     return '{' . implode(',', $output) . '}';
+  }
+
+  /**
+   * Escape special characters in values.
+   *
+   * @param string $value
+   *   The raw value.
+   *
+   * @return string
+   *   The escaped value.
+   */
+  protected function escapeValue($value) {
+    $value = str_replace("\"", "\\\"", $value);
+    $value = str_replace("\n", "\\n", $value);
+    $value = str_replace("\\", "\\\\", $value);
+    return $value;
   }
 
 }

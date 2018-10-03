@@ -13,13 +13,6 @@ class Gauge extends Metric {
   const TYPE = "gauge";
 
   /**
-   * The metric values.
-   *
-   * @var \PNX\Prometheus\LabelledValue[]
-   */
-  protected $values;
-
-  /**
    * {@inheritdoc}
    */
   public function getType(): string {
@@ -36,17 +29,7 @@ class Gauge extends Metric {
    */
   public function set($value, array $labels = []) {
     $key = $this->getKey($labels);
-    $this->values[$key] = new LabelledValue($value, $labels);
-  }
-
-  /**
-   * Gets the values for this metric.
-   *
-   * @return \PNX\Prometheus\LabelledValue[]
-   *   The array of values.
-   */
-  public function getValues() {
-    return array_values($this->values);
+    $this->labelledValues[$key] = new LabelledValue($value, $labels);
   }
 
 }

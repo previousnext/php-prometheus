@@ -1,4 +1,4 @@
-# PHP Prometheus
+# PHP Prometheus Serializer
 
 A PHP library for serializing to the prometheus text format.
 
@@ -12,6 +12,8 @@ composer require previousnext/php-prometheus
 ```
 
 ## Usage
+
+### Gauge
 
 ```php
 $gauge = new Gauge("foo", "bar", "A test gauge");

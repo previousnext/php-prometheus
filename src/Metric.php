@@ -29,6 +29,13 @@ abstract class Metric {
   protected $help;
 
   /**
+   * The metric values.
+   *
+   * @var \PNX\Prometheus\LabelledValue[]
+   */
+  protected $labelledValues;
+
+  /**
    * Metric constructor.
    *
    * @param string $namespace
@@ -73,6 +80,16 @@ abstract class Metric {
    */
   public function getHelp(): string {
     return $this->help;
+  }
+
+  /**
+   * Gets the values for this metric.
+   *
+   * @return \PNX\Prometheus\LabelledValue[]
+   *   The array of values.
+   */
+  public function getLabelledValues() {
+    return array_values($this->labelledValues);
   }
 
   /**

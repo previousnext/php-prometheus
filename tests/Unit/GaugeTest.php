@@ -13,7 +13,7 @@ class GaugeTest extends TestCase {
   /**
    * @covers ::__construct
    * @covers ::set
-   * @covers ::getValues
+   * @covers ::getLabelledValues
    */
   public function testGauge() {
     $gauge = new Gauge("foo", "bar", "A test gauge");
@@ -24,7 +24,7 @@ class GaugeTest extends TestCase {
     $this->assertEquals("foo_bar", $gauge->getFullName());
     $this->assertEquals("gauge", $gauge->getType());
 
-    $values = $gauge->getValues();
+    $values = $gauge->getLabelledValues();
     $this->assertCount(3, $values);
 
     $value1 = $values[0];
