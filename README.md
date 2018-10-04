@@ -58,7 +58,7 @@ foo_bar{baz="wiz"} 100
 ### Summary
 
 ```php
-$summary = new Summary("foo", "bar", "Summary help text", 'test_bucket');
+$summary = new Summary("foo", "bar", "Summary help text", 'baz');
 $buckets = [0, 0.25, 0.5, 0.75, 1];
 $values = [2, 4, 6, 8, 10];
 $summary->setValues($buckets, $values);
@@ -72,11 +72,11 @@ Expected output:
 ```text
 # HELP foo_bar Summary help text
 # TYPE foo_bar summary
-foo_bar{test_bucket="0"} 2
-foo_bar{test_bucket="0.25"} 4
-foo_bar{test_bucket="0.5"} 6
-foo_bar{test_bucket="0.75"} 8
-foo_bar{test_bucket="1"} 10
+foo_bar{baz="0"} 2
+foo_bar{baz="0.25"} 4
+foo_bar{baz="0.5"} 6
+foo_bar{baz="0.75"} 8
+foo_bar{baz="1"} 10
 foo_bar_sum 30
 foo_bar_count 5
 ```

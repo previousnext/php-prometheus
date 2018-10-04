@@ -79,7 +79,7 @@ class MetricSerializerTest extends TestCase {
    *   The summary.
    */
   protected function getTestSummary() {
-    $summary = new Summary("foo", "bar", "Summary help text", 'test_bucket');
+    $summary = new Summary("foo", "bar", "Summary help text", 'baz');
 
     $buckets = [0, 0.25, 0.5, 0.75, 1];
     $values = [2, 4, 6, 8, 10];

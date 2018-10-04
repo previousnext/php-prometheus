@@ -14,7 +14,7 @@ class SummaryTest extends TestCase {
    * @covers ::setValues
    */
   public function testSummary() {
-    $summary = new Summary("foo", "bar", "Summary help text", 'test_bucket');
+    $summary = new Summary("foo", "bar", "Summary help text", 'baz');
 
     $buckets = [0, 0.25, 0.5, 0.75, 1];
     $values = [2, 4, 6, 8, 10];
@@ -28,7 +28,7 @@ class SummaryTest extends TestCase {
 
     $value1 = $values[0];
     $this->assertEquals(2, $value1->getValue());
-    $this->assertEquals(['test_bucket' => 0], $value1->getLabels());
+    $this->assertEquals(['baz' => 0], $value1->getLabels());
 
     $sum = $values[5];
     $this->assertEquals(30, $sum->getValue());

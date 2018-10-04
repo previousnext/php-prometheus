@@ -1,9 +1,9 @@
 # HELP foo_bar Summary help text
 # TYPE foo_bar summary
-foo_bar{test_bucket="0"} 2
-foo_bar{test_bucket="0.25"} 4
-foo_bar{test_bucket="0.5"} 6
-foo_bar{test_bucket="0.75"} 8
-foo_bar{test_bucket="1"} 10
+foo_bar{baz="0"} 2
+foo_bar{baz="0.25"} 4
+foo_bar{baz="0.5"} 6
+foo_bar{baz="0.75"} 8
+foo_bar{baz="1"} 10
 foo_bar_sum 30
 foo_bar_count 5
