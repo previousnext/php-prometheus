@@ -14,6 +14,7 @@ class CounterTest extends TestCase {
    * @covers ::set
    */
   public function testCounter() {
+
     $counter = new Counter('foo', 'bar', 'Example counter help');
     $counter->set(89, ['baz' => 'wiz']);
 
@@ -25,6 +26,14 @@ class CounterTest extends TestCase {
 
     $this->expectException(\InvalidArgumentException::class);
     $counter->set('bing', ['baz' => 'wiz']);
+  }
+
+  /**
+   * @covers ::__construct
+   */
+  public function testInvalidCounter() {
+    $this->expectException(\InvalidArgumentException::class);
+    new Counter('foo^&**', 'bar&*', 'Example counter help');
   }
 
 }
