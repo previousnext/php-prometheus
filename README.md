@@ -62,6 +62,8 @@ $summary = new Summary("foo", "bar", "Summary help text", 'baz');
 $buckets = [0, 0.25, 0.5, 0.75, 1];
 $values = [2, 4, 6, 8, 10];
 $summary->setValues($buckets, $values);
+$summary->setSum(54321);
+$summary->setCount(212);
 
 $serializer = MetricSerializerFactory::create();
 $output = $serializer->serialize($summary, 'prometheus');
@@ -77,8 +79,8 @@ foo_bar{baz="0.25"} 4
 foo_bar{baz="0.5"} 6
 foo_bar{baz="0.75"} 8
 foo_bar{baz="1"} 10
-foo_bar_sum 30
-foo_bar_count 5
+foo_bar_sum 54321
+foo_bar_count 212
 ```
 
 ## Developing

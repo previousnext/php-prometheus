@@ -68,8 +68,6 @@ class Summary extends Metric {
       $key = $this->getKey($labels);
       $value = $values[$index];
       $this->labelledValues[$key] = new LabelledValue($this->getName(), $value, $labels);
-      $this->sum = $this->sum + $value;
-      $this->count++;
     }
   }
 
@@ -83,6 +81,26 @@ class Summary extends Metric {
     $labelledValues[] = new LabelledValue($this->getName() . '_count',
       $this->count, []);
     return $labelledValues;
+  }
+
+  /**
+   * Sets the Sum.
+   *
+   * @param float $sum
+   *   The Sum.
+   */
+  public function setSum(float $sum): void {
+    $this->sum = $sum;
+  }
+
+  /**
+   * Sets the Count.
+   *
+   * @param int $count
+   *   The Count.
+   */
+  public function setCount(int $count): void {
+    $this->count = $count;
   }
 
   /**

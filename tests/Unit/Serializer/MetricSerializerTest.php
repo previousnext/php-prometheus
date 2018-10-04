@@ -84,6 +84,8 @@ class MetricSerializerTest extends TestCase {
     $buckets = [0, 0.25, 0.5, 0.75, 1];
     $values = [2, 4, 6, 8, 10];
     $summary->setValues($buckets, $values);
+    $summary->setSum(54321);
+    $summary->setCount(212);
 
     return $summary;
   }

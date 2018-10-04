@@ -19,6 +19,8 @@ class SummaryTest extends TestCase {
     $buckets = [0, 0.25, 0.5, 0.75, 1];
     $values = [2, 4, 6, 8, 10];
     $summary->setValues($buckets, $values);
+    $summary->setSum(54321);
+    $summary->setCount(212);
 
     $this->assertEquals("foo_bar", $summary->getName());
     $this->assertEquals("summary", $summary->getType());
@@ -31,11 +33,11 @@ class SummaryTest extends TestCase {
     $this->assertEquals(['baz' => 0], $value1->getLabels());
 
     $sum = $values[5];
-    $this->assertEquals(30, $sum->getValue());
+    $this->assertEquals(54321, $sum->getValue());
     $this->assertEmpty($sum->getLabels());
 
     $count = $values[6];
-    $this->assertEquals(5, $count->getValue());
+    $this->assertEquals(212, $count->getValue());
     $this->assertEmpty($count->getLabels());
   }
 
