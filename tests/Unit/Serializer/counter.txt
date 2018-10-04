@@ -1,0 +1,3 @@
+# HELP foo_bar A counter for testing
+# TYPE foo_bar counter
+foo_bar{baz="wiz"} 100

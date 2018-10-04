@@ -3,6 +3,7 @@
 namespace PNX\Prometheus\Tests\Unit\Serializer;
 
 use PHPUnit\Framework\TestCase;
+use PNX\Prometheus\Counter;
 use PNX\Prometheus\Gauge;
 use PNX\Prometheus\Serializer\MetricSerializerFactory;
 
@@ -14,12 +15,23 @@ class MetricSerializerTest extends TestCase {
   /**
    * @covers ::create
    */
-  public function testSerialize() {
+  public function testSerializeGauge() {
     $serializer = MetricSerializerFactory::create();
     $gauge = $this->getTestGauge();
-    $prom = $serializer->serialize($gauge, 'prometheus');
+    $gaugeText = $serializer->serialize($gauge, 'prometheus');
     $expected = file_get_contents(__DIR__ . '/gauge.txt');
-    $this->assertEquals($expected, $prom);
+    $this->assertEquals($expected, $gaugeText);
+  }
+
+  /**
+   * @covers ::create
+   */
+  public function testSerializeCounter() {
+    $serializer = MetricSerializerFactory::create();
+    $counter = $this->getTestCounter();
+    $counterText = $serializer->serialize($counter, 'prometheus');
+    $expected = file_get_contents(__DIR__ . '/counter.txt');
+    $this->assertEquals($expected, $counterText);
   }
 
   /**
@@ -34,6 +46,18 @@ class MetricSerializerTest extends TestCase {
     $gauge->set(90, ['wobble' => 'wibble', 'bing' => 'bong']);
     $gauge->set(0);
     return $gauge;
+  }
+
+  /**
+   * Gets a counter for testing.
+   *
+   * @return \PNX\Prometheus\Counter
+   *   The gauge.
+   */
+  protected function getTestCounter() {
+    $counter = new Counter("foo", "bar", "A counter for testing");
+    $counter->set(100, ['baz' => 'wiz']);
+    return $counter;
   }
 
 }

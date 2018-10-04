@@ -10,13 +10,13 @@ class Gauge extends Metric {
   /**
    * The metric type.
    */
-  const TYPE = "gauge";
+  const TYPE_GAUGE = "gauge";
 
   /**
    * {@inheritdoc}
    */
   public function getType(): string {
-    return self::TYPE;
+    return self::TYPE_GAUGE;
   }
 
   /**
