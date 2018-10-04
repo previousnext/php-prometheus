@@ -1,5 +1,5 @@
 {
-  "name": "previousnext/pnx-prometheus",
+  "name": "previousnext/php-prometheus",
   "description": "A PHP library for serializing to the prometheus text format.",
   "license": "GPL-2.0-or-later",
   "authors": [
