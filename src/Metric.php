@@ -19,7 +19,7 @@ abstract class Metric {
    *
    * @var string
    */
-  protected $fullName;
+  protected $name;
 
   /**
    * The help message for the metric.
@@ -47,10 +47,8 @@ abstract class Metric {
    */
   public function __construct(string $namespace, string $name, string $help) {
     $fullName = $namespace . '_' . $name;
-    if (!preg_match(self::METRIC_NAME_REGEX, $fullName)) {
-      throw new InvalidArgumentException("Invalid metric name: '" . $fullName . "'");
-    }
-    $this->fullName = $fullName;
+    $this->validateName($fullName);
+    $this->name = $fullName;
     $this->help = $help;
   }
 
@@ -68,8 +66,8 @@ abstract class Metric {
    * @return string
    *   The metric name.
    */
-  public function getFullName(): string {
-    return $this->fullName;
+  public function getName(): string {
+    return $this->name;
   }
 
   /**
@@ -90,6 +88,18 @@ abstract class Metric {
    */
   public function getLabelledValues() {
     return array_values($this->labelledValues);
+  }
+
+  /**
+   * Validates a metric or label name.
+   *
+   * @param string $name
+   *   The metric or label name.
+   */
+  protected function validateName($name): void {
+    if (!preg_match(self::METRIC_NAME_REGEX, $name)) {
+      throw new InvalidArgumentException("Invalid name: '" . $name . "'");
+    }
   }
 
   /**

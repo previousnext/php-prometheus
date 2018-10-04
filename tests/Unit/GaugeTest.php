@@ -21,7 +21,7 @@ class GaugeTest extends TestCase {
     $gauge->set(90, ['wobble' => 'wibble', 'bing' => 'bong']);
     $gauge->set(0);
 
-    $this->assertEquals("foo_bar", $gauge->getFullName());
+    $this->assertEquals("foo_bar", $gauge->getName());
     $this->assertEquals("gauge", $gauge->getType());
 
     $values = $gauge->getLabelledValues();

@@ -27,20 +27,33 @@ class LabelledValue {
   protected $labels;
 
   /**
+   * The name override for this labelled value.
+   *
+   * @var string
+   */
+  protected $name;
+
+  /**
    * Value constructor.
    *
+   * @param string $name
+   *   The name override for this label.
    * @param mixed $value
    *   The metric value.
    * @param array[] $labels
    *   The key value pairs of labels.
    */
-  public function __construct($value, array $labels = []) {
+  public function __construct($name, $value, array $labels = []) {
     $this->value = $value;
-    foreach ($labels as $name => $v) {
-      if (!preg_match(self::LABEL_NAME_REGEX, $name)) {
-        throw new \InvalidArgumentException("Invalid label name: '" . $name . "'");
+    foreach ($labels as $labelKey => $labelValue) {
+      if (!preg_match(self::LABEL_NAME_REGEX, $labelKey)) {
+        throw new \InvalidArgumentException("Invalid label name: '" . $labelKey . "'");
       }
     }
+    if (!empty($name) && !preg_match(self::LABEL_NAME_REGEX, $name)) {
+      throw new \InvalidArgumentException("Invalid metric name: '" . $name . "'");
+    }
+    $this->name = $name;
     $this->labels = $labels;
   }
 
@@ -62,6 +75,16 @@ class LabelledValue {
    */
   public function getLabels(): array {
     return $this->labels;
+  }
+
+  /**
+   * Gets the Name override.
+   *
+   * @return null|string
+   *   The Name.
+   */
+  public function getName() {
+    return $this->name;
   }
 
 }

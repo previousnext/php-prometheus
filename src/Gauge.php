@@ -29,7 +29,7 @@ class Gauge extends Metric {
    */
   public function set($value, array $labels = []) {
     $key = $this->getKey($labels);
-    $this->labelledValues[$key] = new LabelledValue($value, $labels);
+    $this->labelledValues[$key] = new LabelledValue($this->getName(), $value, $labels);
   }
 
 }

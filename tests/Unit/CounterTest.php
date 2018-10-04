@@ -18,7 +18,7 @@ class CounterTest extends TestCase {
     $counter = new Counter('foo', 'bar', 'Example counter help');
     $counter->set(89, ['baz' => 'wiz']);
 
-    $this->assertEquals("foo_bar", $counter->getFullName());
+    $this->assertEquals("foo_bar", $counter->getName());
     $this->assertEquals("counter", $counter->getType());
 
     $this->expectException(\InvalidArgumentException::class);

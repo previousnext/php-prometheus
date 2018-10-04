@@ -23,11 +23,11 @@ class PrometheusEncoder implements EncoderInterface {
    */
   public function encode($data, $format, array $context = []) {
     $output = [];
-    $output[] = '# HELP ' . $data['full_name'] . ' ' . $data['help'];
-    $output[] = '# TYPE ' . $data['full_name'] . ' ' . $data['type'];
+    $output[] = '# HELP ' . $data['name'] . ' ' . $data['help'];
+    $output[] = '# TYPE ' . $data['name'] . ' ' . $data['type'];
 
     foreach ($data['labelled_values'] as $labelledValue) {
-      $output[] = $data['full_name'] . $this->encodeLabels($labelledValue['labels']) . ' ' . $this->escapeValue($labelledValue['value']);
+      $output[] = $labelledValue['name'] . $this->encodeLabels($labelledValue['labels']) . ' ' . $this->escapeValue($labelledValue['value']);
     }
     return implode("\n", $output) . "\n";
   }

@@ -34,7 +34,7 @@ class Counter extends Metric {
       throw new InvalidArgumentException("A count value must be a positive integer.");
     }
     $key = $this->getKey($labels);
-    $this->labelledValues[$key] = new LabelledValue($value, $labels);
+    $this->labelledValues[$key] = new LabelledValue($this->getName(), $value, $labels);
   }
 
   /**

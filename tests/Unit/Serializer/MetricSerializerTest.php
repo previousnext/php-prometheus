@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use PNX\Prometheus\Counter;
 use PNX\Prometheus\Gauge;
 use PNX\Prometheus\Serializer\MetricSerializerFactory;
+use PNX\Prometheus\Summary;
 
 /**
  * @coversDefaultClass \PNX\Prometheus\Serializer\MetricSerializerFactory
@@ -35,6 +36,17 @@ class MetricSerializerTest extends TestCase {
   }
 
   /**
+   * @covers ::create
+   */
+  public function testSerializeSummary() {
+    $serializer = MetricSerializerFactory::create();
+    $summary = $this->getTestSummary();
+    $summaryText = $serializer->serialize($summary, 'prometheus');
+    $expected = file_get_contents(__DIR__ . '/summary.txt');
+    $this->assertEquals($expected, $summaryText);
+  }
+
+  /**
    * Gets a gauge for testing.
    *
    * @return \PNX\Prometheus\Gauge
@@ -52,12 +64,28 @@ class MetricSerializerTest extends TestCase {
    * Gets a counter for testing.
    *
    * @return \PNX\Prometheus\Counter
-   *   The gauge.
+   *   The counter.
    */
   protected function getTestCounter() {
     $counter = new Counter("foo", "bar", "A counter for testing");
     $counter->set(100, ['baz' => 'wiz']);
     return $counter;
+  }
+
+  /**
+   * Gets a counter for testing.
+   *
+   * @return \PNX\Prometheus\Summary
+   *   The summary.
+   */
+  protected function getTestSummary() {
+    $summary = new Summary("foo", "bar", "Summary help text", 'test_bucket');
+
+    $buckets = [0, 0.25, 0.5, 0.75, 1];
+    $values = [2, 4, 6, 8, 10];
+    $summary->setValues($buckets, $values);
+
+    return $summary;
   }
 
 }
