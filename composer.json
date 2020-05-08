@@ -15,9 +15,9 @@
     "symfony/serializer": "^3.4||^4.4"
   },
   "require-dev": {
-    "drupal/coder": ">=8.2.12",
-    "phpunit/phpunit": "~8.5",
-    "symfony/phpunit-bridge": "~3.4||^4.4"
+    "drupal/coder": "^8.3.8",
+    "phpunit/phpunit": "^8.5.4",
+    "symfony/phpunit-bridge": "^4.4.8"
   },
   "autoload": {
     "psr-4": {"PNX\\Prometheus\\": "src/"}
