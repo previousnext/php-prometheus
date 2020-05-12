@@ -37,6 +37,7 @@ class GaugeTest extends TestCase {
 
   /**
    * Ensure a gauge with no values is valid.
+   *
    * @covers ::__construct
    * @covers ::getLabelledValues
    */
