@@ -35,4 +35,15 @@ class GaugeTest extends TestCase {
 
   }
 
+  /**
+   * Ensure a gauge with no values is valid.
+   *
+   * @covers ::__construct
+   * @covers ::getLabelledValues
+   */
+  public function testGaugeNoValues() {
+    $gauge = new Gauge("foo", "bar", "A test gauge");
+    $this->assertEmpty($gauge->getLabelledValues());
+  }
+
 }

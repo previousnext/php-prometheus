@@ -33,7 +33,7 @@ abstract class Metric {
    *
    * @var \PNX\Prometheus\LabelledValue[]
    */
-  protected $labelledValues;
+  protected $labelledValues = [];
 
   /**
    * Metric constructor.
