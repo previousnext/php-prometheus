@@ -9,10 +9,10 @@
     }
   ],
   "require": {
-    "php": "^7.1",
+    "php": "^7.2",
     "ext-json": "*",
-    "symfony/property-access": "^3.4||^4.4",
-    "symfony/serializer": "^3.4||^4.4"
+    "symfony/property-access": "^3.4||^4.4||^5.0",
+    "symfony/serializer": "^3.4||^4.4||^5.0"
   },
   "require-dev": {
     "drupal/coder": "^8.3.8",
