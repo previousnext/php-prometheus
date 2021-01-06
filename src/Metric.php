@@ -2,8 +2,6 @@
 
 namespace PNX\Prometheus;
 
-use InvalidArgumentException;
-
 /**
  * Value object to represent a prometheus metric.
  */
@@ -98,7 +96,7 @@ abstract class Metric {
    */
   protected function validateName($name): void {
     if (!preg_match(self::METRIC_NAME_REGEX, $name)) {
-      throw new InvalidArgumentException("Invalid name: '" . $name . "'");
+      throw new \InvalidArgumentException("Invalid name: '" . $name . "'");
     }
   }
 
