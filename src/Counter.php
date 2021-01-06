@@ -2,8 +2,6 @@
 
 namespace PNX\Prometheus;
 
-use InvalidArgumentException;
-
 /**
  * Value object representing a Prometheus counter type.
  */
@@ -31,7 +29,7 @@ class Counter extends Metric {
    */
   public function set($value, array $labels = []) {
     if (!$this->isValidValue($value)) {
-      throw new InvalidArgumentException("A count value must be a positive integer.");
+      throw new \InvalidArgumentException("A count value must be a positive integer.");
     }
     $key = $this->getKey($labels);
     $this->labelledValues[$key] = new LabelledValue($this->getName(), $value, $labels);
