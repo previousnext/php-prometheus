@@ -16,7 +16,7 @@ jobs:
         type: string
         default: ""
     docker:
-      - image: skpr/php-circleci:7.4-1.x
+      - image: skpr/php-circleci:8.1-v2-latest
     working_directory: /data
     steps:
       - checkout
