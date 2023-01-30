@@ -21,7 +21,7 @@ class PrometheusEncoder implements EncoderInterface {
   /**
    * {@inheritdoc}
    */
-  public function encode(mixed $data, string $format, array $context = []): string {
+  public function encode($data, $format, array $context = []): string {
     $output = [];
     $output[] = '# HELP ' . $data['name'] . ' ' . $data['help'];
     $output[] = '# TYPE ' . $data['name'] . ' ' . $data['type'];
