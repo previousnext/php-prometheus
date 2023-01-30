@@ -16,7 +16,7 @@
   },
   "require-dev": {
     "drupal/coder": "^8.3.16",
-    "phpunit/phpunit": "^8.5.14 || ^9.5",
+    "phpunit/phpunit": "^9.5",
     "phpspec/prophecy": "^1.16",
     "symfony/phpunit-bridge": "^5.4"
   },
