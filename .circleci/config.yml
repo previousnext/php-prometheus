@@ -16,7 +16,7 @@ jobs:
         type: string
         default: ""
     docker:
-      - image: skpr/php-circleci:7.4-1.x
+      - image: skpr/php-circleci:8.1-v2-latest
     working_directory: /data
     steps:
       - checkout
@@ -25,7 +25,7 @@ jobs:
             - deps-{{ arch }}
       - run:
           name: "Install Dependencies"
-          command: composer update --prefer-dist --no-progress --no-suggest --no-interaction <<parameters.composer_args>>
+          command: composer update --prefer-dist --no-progress --no-interaction <<parameters.composer_args>>
       - save_cache:
           key: deps-{{ arch }}
           paths:

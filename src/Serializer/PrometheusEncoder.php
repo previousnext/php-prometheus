@@ -14,14 +14,14 @@ class PrometheusEncoder implements EncoderInterface {
   /**
    * {@inheritdoc}
    */
-  public function supportsEncoding($format) {
+  public function supportsEncoding($format): bool {
     return $format == self::ENCODING;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function encode($data, $format, array $context = []) {
+  public function encode($data, $format, array $context = []): string {
     $output = [];
     $output[] = '# HELP ' . $data['name'] . ' ' . $data['help'];
     $output[] = '# TYPE ' . $data['name'] . ' ' . $data['type'];
