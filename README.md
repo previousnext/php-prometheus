@@ -2,8 +2,6 @@
 
 A PHP library for serializing to the prometheus text format.
 
-[![CircleCI](https://circleci.com/gh/previousnext/php-prometheus.svg?style=svg)](https://circleci.com/gh/previousnext/php-prometheus)
-
 **NOTE** This library does not keep state. It is intended purely as a serialization library. Therefore, there are no
 methods into increment or decrement values for metrics, only to set them in order to be serialized.
 
