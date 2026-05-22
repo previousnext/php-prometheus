@@ -14,24 +14,20 @@ abstract class Metric {
 
   /**
    * The metric name.
-   *
-   * @var string
    */
-  protected $name;
+  protected string $name;
 
   /**
    * The help message for the metric.
-   *
-   * @var string
    */
-  protected $help;
+  protected string $help;
 
   /**
    * The metric values.
    *
    * @var \PNX\Prometheus\LabelledValue[]
    */
-  protected $labelledValues = [];
+  protected array $labelledValues = [];
 
   /**
    * Metric constructor.
@@ -84,7 +80,7 @@ abstract class Metric {
    * @return \PNX\Prometheus\LabelledValue[]
    *   The array of values.
    */
-  public function getLabelledValues() {
+  public function getLabelledValues(): array {
     return array_values($this->labelledValues);
   }
 
@@ -94,7 +90,7 @@ abstract class Metric {
    * @param string $name
    *   The metric or label name.
    */
-  protected function validateName($name): void {
+  protected function validateName(string $name): void {
     if (!preg_match(self::METRIC_NAME_REGEX, $name)) {
       throw new \InvalidArgumentException("Invalid name: '" . $name . "'");
     }
@@ -103,13 +99,13 @@ abstract class Metric {
   /**
    * Generates a unique key for the specified labels.
    *
-   * @param array $labels
+   * @param array<string, string|int|float> $labels
    *   The labels.
    *
    * @return string
    *   A unique key for the labels.
    */
-  protected function getKey(array $labels) {
+  protected function getKey(array $labels): string {
     return md5(json_encode($labels, JSON_FORCE_OBJECT));
   }
 

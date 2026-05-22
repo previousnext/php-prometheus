@@ -14,14 +14,16 @@ class PrometheusEncoder implements EncoderInterface {
   /**
    * {@inheritdoc}
    */
-  public function supportsEncoding($format): bool {
+  public function supportsEncoding(string $format): bool {
     return $format == self::ENCODING;
   }
 
   /**
    * {@inheritdoc}
+   *
+   * @phpstan-ignore missingType.iterableValue
    */
-  public function encode($data, $format, array $context = []): string {
+  public function encode(mixed $data, string $format, array $context = []): string {
     $output = [];
     $output[] = '# HELP ' . $data['name'] . ' ' . $data['help'];
     $output[] = '# TYPE ' . $data['name'] . ' ' . $data['type'];
@@ -35,13 +37,13 @@ class PrometheusEncoder implements EncoderInterface {
   /**
    * Encode the labels as in the prometheus format.
    *
-   * @param array $labels
+   * @param array<string, string|int|float> $labels
    *   The labels.
    *
    * @return string
    *   The labels in prometheus format.
    */
-  protected function encodeLabels(array $labels) {
+  protected function encodeLabels(array $labels): string {
     if (empty($labels)) {
       return '';
     }
@@ -55,13 +57,13 @@ class PrometheusEncoder implements EncoderInterface {
   /**
    * Escape special characters in values.
    *
-   * @param string $value
+   * @param string|int|float $value
    *   The raw value.
    *
    * @return string
    *   The escaped value.
    */
-  protected function escapeValue($value) {
+  protected function escapeValue(string|int|float $value): string {
     $value = str_replace("\"", "\\\"", $value);
     $value = str_replace("\n", "\\n", $value);
     $value = str_replace("\\", "\\\\", $value);

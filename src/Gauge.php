@@ -24,10 +24,10 @@ class Gauge extends Metric {
    *
    * @param mixed $value
    *   The value.
-   * @param array $labels
+   * @param array<string, string|int|float> $labels
    *   The list of key value label pairs.
    */
-  public function set($value, array $labels = []) {
+  public function set(mixed $value, array $labels = []): void {
     $key = $this->getKey($labels);
     $this->labelledValues[$key] = new LabelledValue($this->getName(), $value, $labels);
   }

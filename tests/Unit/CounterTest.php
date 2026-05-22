@@ -2,18 +2,20 @@
 
 namespace PNX\Prometheus\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use PNX\Prometheus\Counter;
 
 /**
- * @coversDefaultClass \PNX\Prometheus\Counter
+ * Tests for the Counter class.
  */
+#[CoversClass(Counter::class)]
 class CounterTest extends TestCase {
 
   /**
-   * @covers ::set
+   * Tests setting counter values.
    */
-  public function testCounter() {
+  public function testCounter(): void {
 
     $counter = new Counter('foo', 'bar', 'Example counter help');
     $counter->set(89, ['baz' => 'wiz']);
@@ -29,9 +31,9 @@ class CounterTest extends TestCase {
   }
 
   /**
-   * @covers ::__construct
+   * Tests that invalid counter names throw an exception.
    */
-  public function testInvalidCounter() {
+  public function testInvalidCounter(): void {
     $this->expectException(\InvalidArgumentException::class);
     new Counter('foo^&**', 'bar&*', 'Example counter help');
   }

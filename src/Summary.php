@@ -14,29 +14,32 @@ class Summary extends Metric {
 
   /**
    * The sum of all values.
-   *
-   * @var float
    */
-  protected $sum;
+  protected float $sum;
 
   /**
    * The count of all values.
-   *
-   * @var int
    */
-  protected $count;
+  protected int $count;
 
   /**
    * The metric label.
-   *
-   * @var string
    */
-  protected $label;
+  protected string $label;
 
   /**
    * Summary constructor.
+   *
+   * @param string $namespace
+   *   The metric namespace.
+   * @param string $name
+   *   The metric name.
+   * @param string $help
+   *   The help message for the metric.
+   * @param string $label
+   *   The label name for the summary buckets.
    */
-  public function __construct(string $namespace, string $name, string $help, $label) {
+  public function __construct(string $namespace, string $name, string $help, string $label) {
     parent::__construct($namespace, $name, $help);
     $this->sum = 0;
     $this->count = 0;
@@ -54,12 +57,12 @@ class Summary extends Metric {
   /**
    * Sets an array of summary values.
    *
-   * @param array $buckets
+   * @param array<int|float> $buckets
    *   The list of buckets.
-   * @param array $values
+   * @param array<int|float> $values
    *   The list of bucket values.
    */
-  public function setValues(array $buckets, array $values) {
+  public function setValues(array $buckets, array $values): void {
     if (count($buckets) != count($values)) {
       throw new \InvalidArgumentException("The number of buckets and values must match.");
     }
@@ -74,7 +77,7 @@ class Summary extends Metric {
   /**
    * {@inheritdoc}
    */
-  public function getLabelledValues() {
+  public function getLabelledValues(): array {
     $labelledValues = parent::getLabelledValues();
     $labelledValues[] = new LabelledValue($this->getName() . '_sum',
       $this->sum, []);

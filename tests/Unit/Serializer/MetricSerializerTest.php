@@ -2,6 +2,7 @@
 
 namespace PNX\Prometheus\Tests\Unit\Serializer;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use PNX\Prometheus\Counter;
 use PNX\Prometheus\Gauge;
@@ -9,14 +10,15 @@ use PNX\Prometheus\Serializer\MetricSerializerFactory;
 use PNX\Prometheus\Summary;
 
 /**
- * @coversDefaultClass \PNX\Prometheus\Serializer\MetricSerializerFactory
+ * Tests for the MetricSerializerFactory class.
  */
+#[CoversClass(MetricSerializerFactory::class)]
 class MetricSerializerTest extends TestCase {
 
   /**
-   * @covers ::create
+   * Tests serializing a gauge.
    */
-  public function testSerializeGauge() {
+  public function testSerializeGauge(): void {
     $serializer = MetricSerializerFactory::create();
     $gauge = $this->getTestGauge();
     $gaugeText = $serializer->serialize($gauge, 'prometheus');
@@ -25,9 +27,9 @@ class MetricSerializerTest extends TestCase {
   }
 
   /**
-   * @covers ::create
+   * Tests serializing a counter.
    */
-  public function testSerializeCounter() {
+  public function testSerializeCounter(): void {
     $serializer = MetricSerializerFactory::create();
     $counter = $this->getTestCounter();
     $counterText = $serializer->serialize($counter, 'prometheus');
@@ -36,9 +38,9 @@ class MetricSerializerTest extends TestCase {
   }
 
   /**
-   * @covers ::create
+   * Tests serializing a summary.
    */
-  public function testSerializeSummary() {
+  public function testSerializeSummary(): void {
     $serializer = MetricSerializerFactory::create();
     $summary = $this->getTestSummary();
     $summaryText = $serializer->serialize($summary, 'prometheus');
@@ -52,7 +54,7 @@ class MetricSerializerTest extends TestCase {
    * @return \PNX\Prometheus\Gauge
    *   The gauge.
    */
-  protected function getTestGauge() {
+  protected function getTestGauge(): Gauge {
     $gauge = new Gauge("foo", "bar", "A test gauge");
     $gauge->set(100, ['baz' => 'wiz']);
     $gauge->set(90, ['wobble' => 'wibble', 'bing' => 'bong']);
@@ -66,19 +68,19 @@ class MetricSerializerTest extends TestCase {
    * @return \PNX\Prometheus\Counter
    *   The counter.
    */
-  protected function getTestCounter() {
+  protected function getTestCounter(): Counter {
     $counter = new Counter("foo", "bar", "A counter for testing");
     $counter->set(100, ['baz' => 'wiz']);
     return $counter;
   }
 
   /**
-   * Gets a counter for testing.
+   * Gets a summary for testing.
    *
    * @return \PNX\Prometheus\Summary
    *   The summary.
    */
-  protected function getTestSummary() {
+  protected function getTestSummary(): Summary {
     $summary = new Summary("foo", "bar", "Summary help text", 'baz');
 
     $buckets = [0, 0.25, 0.5, 0.75, 1];
