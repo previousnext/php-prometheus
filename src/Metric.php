@@ -20,7 +20,7 @@ abstract class Metric {
   /**
    * The help message for the metric.
    */
-  protected string $help;
+  protected string|\Stringable $help;
 
   /**
    * The metric values.
@@ -36,10 +36,10 @@ abstract class Metric {
    *   The metric namespace.
    * @param string $name
    *   The metric name.
-   * @param string $help
+   * @param string|\Stringable $help
    *   The help message for the metric.
    */
-  public function __construct(string $namespace, string $name, string $help) {
+  public function __construct(string $namespace, string $name, string|\Stringable $help) {
     $fullName = $namespace . '_' . $name;
     $this->validateName($fullName);
     $this->name = $fullName;
@@ -71,7 +71,7 @@ abstract class Metric {
    *   The Help.
    */
   public function getHelp(): string {
-    return $this->help;
+    return (string) $this->help;
   }
 
   /**
