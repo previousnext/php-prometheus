@@ -30,7 +30,7 @@ class Counter extends Metric {
    *   The list of key value label pairs.
    *
    * @throws \InvalidArgumentException
-   *   If the value is not a positive integer.
+   *   If the value is not a non-negative integer.
    */
   public function set(mixed $value, array $labels = []): void {
     if (!$this->isValidValue($value)) {
