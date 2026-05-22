@@ -36,12 +36,12 @@ class Summary extends Metric {
    *   The metric namespace.
    * @param string $name
    *   The metric name.
-   * @param string $help
+   * @param string|\Stringable $help
    *   The help message for the metric.
    * @param string $label
    *   The label name for the summary buckets.
    */
-  public function __construct(string $namespace, string $name, string $help, string $label) {
+  public function __construct(string $namespace, string $name, string|\Stringable $help, string $label) {
     parent::__construct($namespace, $name, $help);
     $this->sum = 0;
     $this->count = 0;
