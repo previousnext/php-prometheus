@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Boostrap for PHPUnit.
+ * Bootstrap for PHPUnit.
  */
 
 declare(strict_types=1);
