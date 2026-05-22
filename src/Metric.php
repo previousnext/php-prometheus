@@ -91,6 +91,9 @@ abstract class Metric {
    *
    * @param string $name
    *   The metric or label name.
+   *
+   * @throws \InvalidArgumentException
+   *   If the name is invalid.
    */
   protected function validateName(string $name): void {
     if (!preg_match(self::METRIC_NAME_REGEX, $name)) {

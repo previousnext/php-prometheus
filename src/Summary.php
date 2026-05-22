@@ -63,6 +63,9 @@ class Summary extends Metric {
    *   The list of buckets.
    * @param array<int|float> $values
    *   The list of bucket values.
+   *
+   * @throws \InvalidArgumentException
+   *   If the number of buckets and values do not match.
    */
   public function setValues(array $buckets, array $values): void {
     if (count($buckets) != count($values)) {

@@ -40,6 +40,9 @@ class LabelledValue {
    *   The metric value.
    * @param array<string, string|int|float> $labels
    *   The key value pairs of labels.
+   *
+   * @throws \InvalidArgumentException
+   *   If the name or label names are invalid.
    */
   public function __construct(string $name, mixed $value, array $labels = []) {
     $this->value = $value;
