@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PNX\Prometheus\Serializer;
 
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;

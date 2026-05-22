@@ -5,6 +5,8 @@
  * Boostrap for PHPUnit.
  */
 
+declare(strict_types=1);
+
 $autoloader = __DIR__ . '/../vendor/autoload.php';
 $loader = require $autoloader;
 

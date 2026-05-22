@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PNX\Prometheus\Tests\Unit\Serializer;
 
 use PHPUnit\Framework\Attributes\CoversClass;

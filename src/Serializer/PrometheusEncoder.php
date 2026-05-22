@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PNX\Prometheus\Serializer;
 
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
@@ -64,9 +66,10 @@ class PrometheusEncoder implements EncoderInterface {
    *   The escaped value.
    */
   protected function escapeValue(string|int|float $value): string {
+    $value = (string) $value;
+    $value = str_replace("\\", "\\\\", $value);
     $value = str_replace("\"", "\\\"", $value);
     $value = str_replace("\n", "\\n", $value);
-    $value = str_replace("\\", "\\\\", $value);
     return $value;
   }
 
