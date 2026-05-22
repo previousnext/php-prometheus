@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Boostrap for PHPUnit.
+ * Bootstrap for PHPUnit.
  */
 
-assert_options(ASSERT_ACTIVE, FALSE);
+declare(strict_types=1);
 
 $autoloader = __DIR__ . '/../vendor/autoload.php';
 $loader = require $autoloader;

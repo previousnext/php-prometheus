@@ -1,19 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PNX\Prometheus\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use PNX\Prometheus\Summary;
 
 /**
- * @coversDefaultClass \PNX\Prometheus\Summary
+ * Tests for the Summary class.
  */
+#[CoversClass(Summary::class)]
 class SummaryTest extends TestCase {
 
   /**
-   * @covers ::setValues
+   * Tests setting summary values.
    */
-  public function testSummary() {
+  public function testSummary(): void {
     $summary = new Summary("foo", "bar", "Summary help text", 'baz');
 
     $buckets = [0, 0.25, 0.5, 0.75, 1];

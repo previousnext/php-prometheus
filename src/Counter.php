@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PNX\Prometheus;
 
 /**
@@ -24,10 +26,13 @@ class Counter extends Metric {
    *
    * @param mixed $value
    *   The value.
-   * @param array $labels
+   * @param array<string, string|int|float> $labels
    *   The list of key value label pairs.
+   *
+   * @throws \InvalidArgumentException
+   *   If the value is not a non-negative integer.
    */
-  public function set($value, array $labels = []) {
+  public function set(mixed $value, array $labels = []): void {
     if (!$this->isValidValue($value)) {
       throw new \InvalidArgumentException("A count value must be a positive integer.");
     }
@@ -44,7 +49,7 @@ class Counter extends Metric {
    * @return bool
    *   TRUE if the value is valid. FALSE otherwise.
    */
-  protected function isValidValue($value) {
+  protected function isValidValue(mixed $value): bool {
     return is_int($value) && $value >= 0;
   }
 

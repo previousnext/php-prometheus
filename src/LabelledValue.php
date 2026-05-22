@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PNX\Prometheus;
 
 /**
@@ -14,24 +16,20 @@ class LabelledValue {
 
   /**
    * The metric value.
-   *
-   * @var mixed
    */
-  protected $value;
+  protected mixed $value;
 
   /**
    * The key value pairs of labels.
    *
-   * @var array
+   * @var array<string, string|int|float>
    */
-  protected $labels;
+  protected array $labels;
 
   /**
    * The name override for this labelled value.
-   *
-   * @var string
    */
-  protected $name;
+  protected string $name;
 
   /**
    * Value constructor.
@@ -40,10 +38,13 @@ class LabelledValue {
    *   The name override for this label.
    * @param mixed $value
    *   The metric value.
-   * @param array[] $labels
+   * @param array<string, string|int|float> $labels
    *   The key value pairs of labels.
+   *
+   * @throws \InvalidArgumentException
+   *   If the name or label names are invalid.
    */
-  public function __construct($name, $value, array $labels = []) {
+  public function __construct(string $name, mixed $value, array $labels = []) {
     $this->value = $value;
     foreach ($labels as $labelKey => $labelValue) {
       if (!preg_match(self::LABEL_NAME_REGEX, $labelKey)) {
@@ -63,14 +64,14 @@ class LabelledValue {
    * @return mixed
    *   The Value.
    */
-  public function getValue() {
+  public function getValue(): mixed {
     return $this->value;
   }
 
   /**
    * Gets the Labels.
    *
-   * @return array[]
+   * @return array<string, string|int|float>
    *   The Labels.
    */
   public function getLabels(): array {
@@ -80,10 +81,10 @@ class LabelledValue {
   /**
    * Gets the Name override.
    *
-   * @return null|string
+   * @return string
    *   The Name.
    */
-  public function getName() {
+  public function getName(): string {
     return $this->name;
   }
 

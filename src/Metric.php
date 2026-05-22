@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PNX\Prometheus;
 
 /**
@@ -14,24 +16,20 @@ abstract class Metric {
 
   /**
    * The metric name.
-   *
-   * @var string
    */
-  protected $name;
+  protected string $name;
 
   /**
    * The help message for the metric.
-   *
-   * @var string
    */
-  protected $help;
+  protected string|\Stringable $help;
 
   /**
    * The metric values.
    *
    * @var \PNX\Prometheus\LabelledValue[]
    */
-  protected $labelledValues = [];
+  protected array $labelledValues = [];
 
   /**
    * Metric constructor.
@@ -40,10 +38,10 @@ abstract class Metric {
    *   The metric namespace.
    * @param string $name
    *   The metric name.
-   * @param string $help
+   * @param string|\Stringable $help
    *   The help message for the metric.
    */
-  public function __construct(string $namespace, string $name, string $help) {
+  public function __construct(string $namespace, string $name, string|\Stringable $help) {
     $fullName = $namespace . '_' . $name;
     $this->validateName($fullName);
     $this->name = $fullName;
@@ -75,7 +73,7 @@ abstract class Metric {
    *   The Help.
    */
   public function getHelp(): string {
-    return $this->help;
+    return (string) $this->help;
   }
 
   /**
@@ -84,7 +82,7 @@ abstract class Metric {
    * @return \PNX\Prometheus\LabelledValue[]
    *   The array of values.
    */
-  public function getLabelledValues() {
+  public function getLabelledValues(): array {
     return array_values($this->labelledValues);
   }
 
@@ -93,8 +91,11 @@ abstract class Metric {
    *
    * @param string $name
    *   The metric or label name.
+   *
+   * @throws \InvalidArgumentException
+   *   If the name is invalid.
    */
-  protected function validateName($name): void {
+  protected function validateName(string $name): void {
     if (!preg_match(self::METRIC_NAME_REGEX, $name)) {
       throw new \InvalidArgumentException("Invalid name: '" . $name . "'");
     }
@@ -103,13 +104,13 @@ abstract class Metric {
   /**
    * Generates a unique key for the specified labels.
    *
-   * @param array $labels
+   * @param array<string, string|int|float> $labels
    *   The labels.
    *
    * @return string
    *   A unique key for the labels.
    */
-  protected function getKey(array $labels) {
+  protected function getKey(array $labels): string {
     return md5(json_encode($labels, JSON_FORCE_OBJECT));
   }
 

@@ -1,21 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PNX\Prometheus\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use PNX\Prometheus\Gauge;
 
 /**
- * @coversDefaultClass \PNX\Prometheus\Gauge
+ * Tests for the Gauge class.
  */
+#[CoversClass(Gauge::class)]
 class GaugeTest extends TestCase {
 
   /**
-   * @covers ::__construct
-   * @covers ::set
-   * @covers ::getLabelledValues
+   * Tests setting gauge values.
    */
-  public function testGauge() {
+  public function testGauge(): void {
     $gauge = new Gauge("foo", "bar", "A test gauge");
     $gauge->set(100, ['baz' => 'wiz']);
     $gauge->set(90, ['wobble' => 'wibble', 'bing' => 'bong']);
@@ -37,11 +39,8 @@ class GaugeTest extends TestCase {
 
   /**
    * Ensure a gauge with no values is valid.
-   *
-   * @covers ::__construct
-   * @covers ::getLabelledValues
    */
-  public function testGaugeNoValues() {
+  public function testGaugeNoValues(): void {
     $gauge = new Gauge("foo", "bar", "A test gauge");
     $this->assertEmpty($gauge->getLabelledValues());
   }
