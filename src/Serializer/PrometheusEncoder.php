@@ -23,7 +23,12 @@ class PrometheusEncoder implements EncoderInterface {
   /**
    * {@inheritdoc}
    *
-   * @phpstan-ignore missingType.iterableValue
+   * @param mixed $data
+   *   The data to encode.
+   * @param string $format
+   *   The encoding format.
+   * @param array<string, mixed> $context
+   *   The serializer context.
    */
   public function encode(mixed $data, string $format, array $context = []): string {
     $output = [];
