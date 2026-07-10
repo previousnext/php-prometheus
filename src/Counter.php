@@ -35,7 +35,6 @@ class Counter extends Metric {
   public function set(mixed $value, array $labels = []): void {
     // @phpstan-ignore function.alreadyNarrowedType
     if (!is_int($value)) {
-      // phpcs:ignore Drupal.Semantics.FunctionTriggerError.TriggerErrorSeeUrlFormat
       @trigger_error(sprintf('Passing a non-int value to %s() is deprecated in php_prometheus:1.1.0 and will throw a \TypeError in php_prometheus:2.0.0. See https://github.com/previousnext/php-prometheus/issues/16', __METHOD__), E_USER_DEPRECATED);
     }
     if (!$this->isValidValue($value)) {
