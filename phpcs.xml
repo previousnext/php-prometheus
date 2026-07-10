@@ -4,5 +4,9 @@
   <file>./src</file>
   <file>./tests</file>
   <arg name="extensions" value="php"/>
-  <rule ref="Drupal"/>
+  <rule ref="Drupal">
+    <!-- Not a Drupal project: deprecation "See" links point to GitHub issues,
+         not drupal.org change records. -->
+    <exclude name="Drupal.Semantics.FunctionTriggerError.TriggerErrorSeeUrlFormat"/>
+  </rule>
 </ruleset>
