@@ -56,7 +56,7 @@ class PrometheusEncoder implements EncoderInterface {
     }
     $output = [];
     foreach ($labels as $key => $value) {
-      $output[] = $key . '="' . $value . '"';
+      $output[] = $key . '="' . $this->escapeValue($value) . '"';
     }
     return '{' . implode(',', $output) . '}';
   }
